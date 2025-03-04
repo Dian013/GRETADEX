@@ -26,7 +26,7 @@
                 <div id="corner_gray"></div>
             </div>
                 <button id="bottom_bar_button" onclick="input_appear()"><i class="fa fa-search" id="icon_bottom_bar_button"></i></button>
-                <input id="bottom_bar_input"></input>
+                <input id="bottom_bar_input">
                 <button id="bottom_bar_button_favorite" onclick="//todo afficher favoris"><i class="fa-solid fa-star" id="icon_bottom_bar_button_favorite"></i></button>
                 <div id="four_lines">
                 <div></div>
@@ -36,12 +36,17 @@
             </div>
         </div>
         
-        <section id="radius"></section>
+        <div id="radius"></div>
     </div>
 
     <section class="content">
-        <img src="img/GretaDexLogo.png" alt="Logo de GretaDex, représentant un pokédex" id="logo_home">
+        <div>
+            <img src="img/GretaDexLogo.png" alt="Logo de GretaDex, représentant un pokédex" id="logo_home">
+            <button id="filter_button" onclick="filter_pokemon()">red</button>
+        </div>
         <div id="list_151_first"></div>
     </section>
+
+    <footer></footer>
 </body>
 </html>
