@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="css/stickers.css">
+    <link rel="stylesheet" href="css/detailled_card.css">
     <script src="js/script.js" defer></script>
-    <title>GRETADEX</title>
+    <title>CARD</title>
 </head>
 <body>
     <div id="screen">
@@ -28,6 +29,7 @@
             </div>
                 <button id="bottom_bar_button" onclick="input_appear()"><i class="fa fa-search" id="icon_bottom_bar_button"></i></button>
                 <input id="bottom_bar_input">
+                <button id="bottom_bar_button_favorite" onclick="home()"><i class="fa-solid fa-home" id="icon_bottom_bar_button_favorite"></i></button>
                 <div id="four_lines">
                 <div></div>
                 <div></div>
@@ -42,14 +44,11 @@
     <section class="content">
         <div>
             <img src="img/GretaDexLogo.png" alt="Logo de GretaDex, représentant un pokédex" id="logo_home">
-            <button id="filter_button" onclick="filter_pokemon()">Types</button>
         </div>
-        <div id="list_151_first"></div>
 
         <div id="space"></div>
     </section>
-
-        
+    
     <footer></footer>
 </body>
 </html>

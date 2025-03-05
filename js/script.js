@@ -1,3 +1,7 @@
+function home(){
+    window.location.href = "home.html"
+}
+
 function input_appear() {
     let bottom_bar_input = document.querySelector("#bottom_bar_input");
     
@@ -11,49 +15,124 @@ function input_appear() {
 function filter_pokemon() {
     let filter_button = document.querySelector("#filter_button");
 
-    console.log("button clicked")
-
-    if (filter_button.textContent.trim() === 'red') {
-        filter_button.textContent = 'green';
+    if (filter_button.textContent.trim() === 'Types') {
+        filter_button.textContent = 'Région';
+        filter_button.style.backgroundColor = '#27DEF2'
     } else {
-        filter_button.textContent = 'red';
+        filter_button.textContent = 'Types';
+        filter_button.style.backgroundColor = '#5EBF76'
     }
 }
 
-fetch("https://pokeapi.co/api/v2/pokemon?limit=151=0")
-    .then((res) => res.json())
-    .then((data) => {
-        const results_list = data.results;
-
-        for (let i = 0; i < results_list.length; i++) {
-
-            let url_pokemon = results_list[i].url;
-
-            search_pokemon_sticker(url_pokemon)
-        }
-
-        setTimeout(function(){
-            const div = document.querySelector('#list_151_first')
-            let footer = document.createElement("div");  //permet d'avoir tout les éléments dans le "screen", sans ça une partie sera caché
-            footer.style.height = "130px"
-            footer.textContent = "Tu n'es pas censé voir ceci"
-            div.appendChild(footer);
-        }, 1000);  //set time parce que sinon la case et charger avant les pokemon
-    }
-);
-
-function search_pokemon_sticker(url_pokemon) {
-    fetch(url_pokemon)        
+function search_151_pokemon(){
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=300=0")
         .then((res) => res.json())
         .then((data) => {
-            const sprites = data.sprites;
-            const div = document.querySelector('#list_151_first')
+            const results_list = data.results;
 
-            let pokemon_sticker = document.createElement("img");
+            for (let i = 0; i < results_list.length; i++) {
 
-            pokemon_sticker.src = sprites.front_default
+                let url_pokemon = results_list[i].url;
 
-            div.appendChild(pokemon_sticker);
+                make_pokemon_sticker(url_pokemon)
+            }
         }
     );
 }
+
+function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire pour qu'il prenne le temps de charger et les avoir dans l'ordre
+    fetch(url_pokemon)        
+        .then((res) => res.json())
+        .then(async (data) => {
+            const sprites = data.sprites; //pour acceder l'image
+            const forms = data.forms; //pour acceder au nom
+            const species = data.species; //pour trouver la couleur correspondant au pokemon
+            url_species = species.url
+            const div = document.querySelector('#list_151_first')
+            
+            let pokemon_sticker_div = document.createElement("div");
+            pokemon_sticker_div.id = "id_div_sticker"
+            let color = await div_background_color(url_species);
+            pokemon_sticker_div.style.border = `2px solid ${color}`;
+
+
+
+            let pokemon_sticker_img = document.createElement("img"); //creation emplacement
+            let pokemon_sticker_name = document.createElement("span");
+            let pokemon_sticker_id = document.createElement("span"); 
+            let pokemon_sticker_types = document.createElement("span");//todo         
+            let pokemon_sticker_see_more = document.createElement("a");           
+            
+            pokemon_sticker_see_more.addEventListener("click", function(){
+                window.location.href = "detailled_card.html"
+            })
+            
+            pokemon_sticker_img.src = sprites.front_default    //chercher données
+            pokemon_sticker_name.textContent = forms[0].name
+            pokemon_sticker_id.textContent = data.id
+            pokemon_sticker_types//todo
+            pokemon_sticker_see_more.textContent = "Voir Plus"
+            
+            pokemon_sticker_div.appendChild(pokemon_sticker_img);  //ajouter dans emplacement
+            pokemon_sticker_div.appendChild(pokemon_sticker_name);
+            pokemon_sticker_div.appendChild(pokemon_sticker_id);
+            pokemon_sticker_div.appendChild(pokemon_sticker_see_more);
+
+
+
+            div.appendChild(pokemon_sticker_div)
+        }
+    );
+}
+
+async function div_background_color(url){
+    const data = await fetch(url)        
+    const color = await data.json()
+    return color.color.name
+}
+
+function detailled_card(){
+
+}
+
+
+
+
+
+
+
+
+
+
+// function search_pokedex_by_region(){
+//     for (let i = 1; i <= 10; i++) {  //cherche les url des pokedex des 10 régions
+//         fetch(`https://pokeapi.co/api/v2/region/${i}/`)
+//         .then((res) => res.json())
+//         .then((data) => {
+//             let main_generation = data.main_generation
+
+//             console.log(main_generation)
+
+//             let url_main_generation = main_generation.url
+
+//             // console.log(url_main_generation)
+
+//             // search_pokemon_in_pokedex(url_regions)
+//         })
+//     }
+// }
+
+// function search_pokemon_in_pokedex(url){
+
+
+
+//         const pokedex = data.pokedexes;
+
+//         url_pokedex = pokedex[0].url
+
+//         console.log(url_pokedex)
+// }
+
+search_151_pokemon()
+
+// search_pokedex_by_region()

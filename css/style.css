@@ -2,7 +2,8 @@ body{
     position: relative;
     margin: 0;
     padding: 0;
-    /* margin: 74px 74px 148px 74px; */
+    background-image: url(../img/BackgroundScreen.jpg);
+    background-size: contain;
 }
 
 .content{
@@ -19,13 +20,23 @@ body{
 }
 
 #filter_button{
-    height: 20px;
-    width: auto;
+    padding: 10px 20px;
 
     display: flex;
     justify-self: center;
 
-    background-color: red;
+    background-color:  #5EBF76;
+}
+
+#list_151_first{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#space{   /*sert à avoir un espace sous le content qui nous permet de voir tout les éléments*/
+    height: 140px;
+    width: auto;
 }
 
 /*Screen Pokedex effect*/
@@ -39,6 +50,7 @@ body{
     background-color: rgb(196, 196, 196);
     height: 65px;
     width: 100vw;
+    border-bottom: 3px solid rgb(99, 99, 99);
 }
 
 #two_circle{
@@ -61,6 +73,8 @@ body{
     background-color: rgb(196, 196, 196);
     height: 100vh;
     width: 65px;
+
+    border-right: 3px solid rgb(146, 145, 145);
 }
 
 #right_bar{
@@ -125,12 +139,20 @@ body{
     transition: 0.4s;
 }
 
+#bottom_bar_input.show {
+    opacity: 100%;
+    width: 30vw;
+}
+
 #bottom_bar_input{
+
     transition: width 0.5s, opacity 0.5s;
 
     margin-top: 40px;
     height: 70px;
-    width: 30vw;
+
+    opacity: 0;
+    width: 0;
 
     background-color: #8F082A;
 
@@ -139,10 +161,6 @@ body{
     padding: 0px 0px 0px 20px;
 }
 
-#bottom_bar_input.show {
-    opacity: 0;
-    width: 0px;
-}
 
 #bottom_bar_button_favorite{
     margin-top: 40px;
