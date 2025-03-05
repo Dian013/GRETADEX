@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="css/stickers.css">
     <link rel="stylesheet" href="css/detailled_card.css">
-    <script src="js/script.js" defer></script>
+    <script src="js/detailled_card.js" defer></script>
     <title>CARD</title>
 </head>
 <body>
@@ -27,15 +27,16 @@
             <div id="corner_red">
                 <div id="corner_gray"></div>
             </div>
-                <button id="bottom_bar_button" onclick="input_appear()"><i class="fa fa-search" id="icon_bottom_bar_button"></i></button>
-                <input id="bottom_bar_input">
-                <button id="bottom_bar_button_favorite" onclick="home()"><i class="fa-solid fa-home" id="icon_bottom_bar_button_favorite"></i></button>
-                <div id="four_lines">
+            <button id="bottom_bar_button" onclick="input_appear()"><i class="fa fa-search" id="icon_bottom_bar_button"></i></button>
+            <input id="bottom_bar_input">
+            <button id="bottom_bar_button_favorite" onclick="home()"><i class="fa-solid fa-home" id="icon_bottom_bar_button_favorite"></i></button>
+            <div id="four_lines">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
+            <span id="footer_span">Mavrodiev Dian - Greta Project - 2025</span>
         </div>
         
         <div id="radius"></div>
@@ -45,7 +46,22 @@
         <div>
             <img src="img/GretaDexLogo.png" alt="Logo de GretaDex, représentant un pokédex" id="logo_home">
         </div>
-
+        <div id="card">
+            <section id="card_img_and_stats">
+                <img src="" alt="" id="card_img">
+                <div id="card_stats">
+                    <h2 id="card_name"></h2>
+                </div>
+            </section>  
+            <section>
+                <div id="card_evolution">
+                    <div id="card_evol_stade_1"></div>
+                    <div id="card_evol_stade_2"></div>
+                    <div id="card_evol_stade_3"></div>
+                </div>
+                <p id="card_description"></p>
+            </section>
+        </div>
         <div id="space"></div>
     </section>
     

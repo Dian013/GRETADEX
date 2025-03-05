@@ -1,0 +1,10 @@
+#card{
+    display: flex;
+
+    width: 95%;
+    height: 100vh;
+    justify-self: center;
+
+
+    background-color: rgb(56, 56, 56);
+}

@@ -63,9 +63,6 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
             let pokemon_sticker_types = document.createElement("span");//todo         
             let pokemon_sticker_see_more = document.createElement("a");           
             
-            pokemon_sticker_see_more.addEventListener("click", function(){
-                window.location.href = "detailled_card.html"
-            })
             
             pokemon_sticker_img.src = sprites.front_default    //chercher données
             pokemon_sticker_name.textContent = forms[0].name
@@ -73,6 +70,12 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
             pokemon_sticker_types//todo
             pokemon_sticker_see_more.textContent = "Voir Plus"
             
+            let pokemon_sticker_id_to_export = data.id
+            pokemon_sticker_see_more.addEventListener("click", function(){
+                window.location.href = "detailled_card.html"
+                localStorage.setItem('pokemon_sticker_id', pokemon_sticker_id_to_export); 
+            })
+
             pokemon_sticker_div.appendChild(pokemon_sticker_img);  //ajouter dans emplacement
             pokemon_sticker_div.appendChild(pokemon_sticker_name);
             pokemon_sticker_div.appendChild(pokemon_sticker_id);
@@ -91,48 +94,7 @@ async function div_background_color(url){
     return color.color.name
 }
 
-function detailled_card(){
-
-}
 
 
-
-
-
-
-
-
-
-
-// function search_pokedex_by_region(){
-//     for (let i = 1; i <= 10; i++) {  //cherche les url des pokedex des 10 régions
-//         fetch(`https://pokeapi.co/api/v2/region/${i}/`)
-//         .then((res) => res.json())
-//         .then((data) => {
-//             let main_generation = data.main_generation
-
-//             console.log(main_generation)
-
-//             let url_main_generation = main_generation.url
-
-//             // console.log(url_main_generation)
-
-//             // search_pokemon_in_pokedex(url_regions)
-//         })
-//     }
-// }
-
-// function search_pokemon_in_pokedex(url){
-
-
-
-//         const pokedex = data.pokedexes;
-
-//         url_pokedex = pokedex[0].url
-
-//         console.log(url_pokedex)
-// }
 
 search_151_pokemon()
-
-// search_pokedex_by_region()

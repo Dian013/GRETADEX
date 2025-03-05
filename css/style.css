@@ -2,8 +2,8 @@ body{
     position: relative;
     margin: 0;
     padding: 0;
-    background-image: url(../img/BackgroundScreen.jpg);
-    background-size: contain;
+    background-image: url(../img/9.svg);
+    /* background-size: ; */
 }
 
 .content{
@@ -209,23 +209,9 @@ body{
 }
 
 
-/*todo voir comment faire le border radius sans que ca gène de cliquer au travers*/
-/* #radius{       
-    position: fixed;
-    top: 50px;
-    bottom: 120px;
-    left: 50px;
-    right: 50px;
-
-    background-color: rgba(0, 0, 0, 0);
-
-    border: 15px solid rgb(255, 255, 255);
-    border-radius: 50px;
-
-    box-shadow:  inset 0px 0px 10px rgb(207, 207, 207);
-
-    height: auto;
-    width: auto;
-} */
-
-/*Screen Pokedex effect*/
+#footer_span{
+    position: absolute;
+    color: rgb(142, 142, 142);
+    bottom: 0;
+    right: 0;
+}
