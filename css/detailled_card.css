@@ -88,9 +88,9 @@
 
 #card_evolution img{
     background-color: white;
-    height: 150px;
-    width: 150px;
-    padding: 50px;
+    height: auto;
+    width: 10vw;
+    padding: 10px;
     border-radius: 100%;
 }
 
