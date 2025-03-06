@@ -49,6 +49,16 @@ body{
     width: auto;
 }
 
+#sticker_span_id_star{
+   font-size: 25px;
+   background-color: none;
+   text-decoration: none;
+   border: none;
+   background: none;
+   
+
+}
+
 #sticker_span_name{
     text-transform: uppercase;
     font-weight: 300;

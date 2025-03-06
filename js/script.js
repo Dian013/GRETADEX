@@ -2,6 +2,7 @@ function home(){
     window.location.href = "home.html"
 }
 
+
 function input_appear() {
     let bottom_bar_input = document.querySelector("#bottom_bar_input")
     
@@ -58,6 +59,7 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
 
 
             let pokemon_sticker_img = document.createElement("img") //creation emplacement
+            let pokemon_sticker_star = document.createElement("button") //creation emplacement
             let pokemon_sticker_name = document.createElement("span")
             let pokemon_sticker_id = document.createElement("span") 
             let pokemon_sticker_types_div = document.createElement("div") 
@@ -65,14 +67,34 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
 
             pokemon_sticker_name.id = "sticker_span_name"
             pokemon_sticker_id.id = "sticker_span_id"
-            
-            
-            pokemon_sticker_img.src = sprites.front_default    //chercher données
+
+            //ajouter favoris (esthetique)    //TODO
+            pokemon_sticker_star.id = "sticker_span_id_star"
+            pokemon_sticker_star.textContent = "★"
+
+            pokemon_sticker_star.addEventListener("click", function(){
+                let sticker_span_id_star = document.querySelector("#sticker_span_id_star")
+    
+                if (sticker_span_id_star.style.textContent == "★") {
+                    sticker_span_id_star.style.textContent = "☆"
+                    console.log('full')
+                } else {
+                    sticker_span_id_star.style.textContent = "★"
+                    console.log('not full')
+                }
+            })
+            //ajouter favoris (esthetique)
+
+
+            //chercher données
+            pokemon_sticker_img.src = sprites.front_default    
             pokemon_sticker_name.textContent = forms[0].name
             pokemon_sticker_id.textContent = data.id
             pokemon_sticker_see_more.textContent = "See More"
+            //chercher données
+
             
-            let pokemon_sticker_id_to_export = data.id
+            let pokemon_sticker_id_to_export = data.id            //"Voir plus" button
             pokemon_sticker_see_more.addEventListener("click", function(){
                 window.location.href = "detailled_card.html"
                 localStorage.setItem('pokemon_sticker_id', pokemon_sticker_id_to_export); 
@@ -89,6 +111,7 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
 
 
             pokemon_sticker_div.appendChild(pokemon_sticker_img)  //ajouter dans emplacement
+            pokemon_sticker_div.appendChild(pokemon_sticker_star)
             pokemon_sticker_div.appendChild(pokemon_sticker_name)
             pokemon_sticker_div.appendChild(pokemon_sticker_id)
             pokemon_sticker_div.appendChild(pokemon_sticker_types_div)
@@ -107,7 +130,8 @@ async function div_background_color(url){
     return color.color.name
 }
 
+function add_to_fav(){
 
-
+}
 
 search_151_pokemon()

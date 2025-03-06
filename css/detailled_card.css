@@ -1,6 +1,6 @@
 #card{
     display: flex;
-
+    flex-direction: column;
     width: 95%;
     padding: 20px;
 
@@ -36,7 +36,7 @@
     object-fit: fill;
     background-image: url(/img/pokeball.png);
     background-size: 100%;
-    padding: 5vw;
+    padding: 4vw;
     border-radius: 100%;
     box-shadow: 0px 0px 20px rgb(255, 255, 255);
 }
@@ -77,6 +77,21 @@
 .progress_bar{
     width: 80%;
     margin-right: 20px;
+}
+
+#card_evolution{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px 0px;
+}
+
+#card_evolution img{
+    background-color: white;
+    height: 150px;
+    width: 150px;
+    padding: 50px;
+    border-radius: 100%;
 }
 
 @media (max-width: 750px) {

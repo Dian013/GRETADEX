@@ -56,6 +56,29 @@ async function search_pokemon_evolutions(){
     }
 }
 
+function make_card_with_pokemon_evolutions(){
+    search_pokemon_evolutions().then(async res => {
+        tab_evolution = res
+
+        console.log(tab_evolution)
+
+        for (let i = 0; i < tab_evolution.length; i++) {
+
+            const data_evolution_card = await fetch(`https://pokeapi.co/api/v2/pokemon/${tab_evolution[i]}`)  
+            const element_evolution_card = await data_evolution_card.json()
+                 
+            evolution_gif = element_evolution_card.sprites.other.showdown.front_default
+
+            const card_evolution = document.querySelector("#card_evolution")
+            const card_evol_stade = document.createElement("img")
+
+            card_evol_stade.src = evolution_gif
+            
+            card_evolution.appendChild(card_evol_stade)  
+        }
+    })    
+}
+
 async function detailled_card_function(){
 //Chercher les infos
     const pokemon_sticker_id = localStorage.getItem("pokemon_sticker_id")
@@ -66,21 +89,7 @@ async function detailled_card_function(){
     const name = element.forms[0].name
 
     //Chercher evolution
-    search_pokemon_evolutions().then(res => {
-        tab_evolution = res
-
-        console.log(tab_evolution)
-
-        for (let i = 0; i < tab_evolution.length; i++) {
-            let card_evolution = document.querySelector("card_evolution")
-            let card_evol_stade = document.createElement("div")
-
-            card_evol_stade.textContent = tab_evolution[i]
-            
-            console.log(card_evol_stade)
-            card_evolution.appendChild(card_evol_stade)   //TODO POURQUOI CA NE MARCHE PAS
-        }
-    })     
+    make_card_with_pokemon_evolutions()
     //Chercher evolution
 
     //Chercher description
@@ -94,7 +103,7 @@ async function detailled_card_function(){
         card_description.textContent = description
     } catch {
         const card_description = document.querySelector("#card_description")
-        card_description.textContent = "it doesn't have a description, but all i know is that's my favorite pokemon"
+        card_description.textContent = "it doesn't have a description, but all i know is that it's my favorite pokemon"
         card_description.style.textAlign= "center"
     }
     //Chercher description
@@ -109,7 +118,7 @@ async function detailled_card_function(){
 
 
 
-    //TODO faire une fonction pour ici
+    //TODO faire une boucle
     const progress_bar_1 = document.querySelector("#progress_bar_1")
     progress_bar_1.value = element.stats[0].base_stat 
     const label_progress_bar_1 = document.querySelector("#label_progress_bar_1")
@@ -139,9 +148,6 @@ async function detailled_card_function(){
     progress_bar_6.value = element.stats[5].base_stat 
     const label_progress_bar_6 = document.querySelector("#label_progress_bar_6")
     label_progress_bar_6.textContent = element.stats[5].stat.name + ` ${element.stats[5].base_stat }%`
-
-
-    //TODO Manque les évolutions, je n'arrive pas à modifier le html dans le try catch, ni extraire la données du try catch
 
 //Intégrer infos à html
 
