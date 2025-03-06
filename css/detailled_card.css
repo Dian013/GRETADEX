@@ -27,12 +27,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 #card_img{
     width: auto;
     height: 40vh;
     object-fit: fill;
+    background-image: url(/img/pokeball.png);
+    background-size: 100%;
+    padding: 5vw;
+    border-radius: 100%;
+    box-shadow: 0px 0px 20px rgb(255, 255, 255);
 }
 
 #card_name{
@@ -71,4 +77,82 @@
 .progress_bar{
     width: 80%;
     margin-right: 20px;
+}
+
+@media (max-width: 750px) {
+    #card{
+        display: flex;
+    
+        width: 95%;
+        padding: 20px;
+    
+        justify-self: center;
+    
+    
+        background-color: rgb(56, 56, 56);
+    
+        border-radius: 5px;
+    }
+    
+    #card_img_and_stats{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    
+    
+    #card_img_name_desc{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+    }
+    
+    #card_img{
+        width: auto;
+        height: 40vh;
+        object-fit: fill;
+    }
+    
+    #card_name{
+        margin-top: 20px;
+        text-transform: uppercase;
+        font-size: 28px;
+        color: white;
+    }
+    
+    #card_description{
+        margin-top: 20px;
+        text-transform: uppercase;
+        text-decoration: wavy;
+        font-size: 22px;
+        color: white;
+    }
+    
+    #card_stats{
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        /* margin: 90px; */
+    }
+    
+    
+    #card_stats label{
+        margin-top: 20px;
+        text-transform: uppercase;
+        font-size: 22px;
+        color: white;
+    }
+    
+    
+    .progress_bar{
+        width: 100%;
+        margin-right: 0px;
+    }
 }

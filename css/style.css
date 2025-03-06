@@ -1,3 +1,13 @@
+.changa-one-regular {
+    font-family: "Changa One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+*{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
 body{
     position: relative;
     margin: 0;
@@ -13,7 +23,7 @@ body{
 
 #logo_home{
     margin: 20px 0px;
-    height: 100px;
+    height: 150px;
     width: auto;
     display: flex;
     justify-self: center;
@@ -33,6 +43,32 @@ body{
     flex-wrap: wrap;
     justify-content: center;
 }
+
+#list_151_first img{
+    height: 200px;
+    width: auto;
+}
+
+#sticker_span_name{
+    text-transform: uppercase;
+    font-weight: 300;
+    width: 100%;
+    text-align: center;
+    background-color: rgb(221, 221, 221);
+}
+
+#list_151_first a{
+    background-color: rgb(221, 221, 221);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#list_151_first a:hover{
+    background-color: rgb(221, 221, 221);
+    padding: 5px;
+    border-radius: 5px;
+}
+
 
 #space{   /*sert à avoir un espace sous le content qui nous permet de voir tout les éléments*/
     height: 140px;
@@ -219,4 +255,210 @@ body{
     bottom: 0;
     right: 0;
     margin-right: 30px;
+}
+
+@media (max-width: 750px) {
+    body{
+        background-color: rgb(253, 104, 49);
+    }
+    
+    .content{
+        margin: 65px 35px 135px 35px;
+        height: 100vh;
+    }
+    
+
+    #logo_home{
+        height: 80px
+    }
+    
+    #filter_button{
+        padding: 10px 20px;
+    
+        display: flex;
+        justify-self: center;
+    
+        background-color:  #5EBF76;
+    }
+    
+    #list_151_first{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #list_151_first{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #list_151_first div{
+        height: auto;
+        width: 100px;
+    }
+    
+    #list_151_first img{
+        height: 80px;
+        width: auto;
+    }
+
+    #space{   /*sert à avoir un espace sous le content qui nous permet de voir tout les éléments*/
+        height: 115px;
+        width: auto;
+    }
+    
+    /*Screen Pokedex effect*/
+    #screen{
+        position: relative;
+    }
+    
+    #top_bar{
+        position: fixed;
+        top: 0;
+        background-color: rgb(196, 196, 196);
+        height: 35px;
+        width: 100vw;
+        border-bottom: 3px solid rgb(99, 99, 99);
+    
+        box-shadow: 0px 0px 20px rgb(59, 59, 59);
+    }
+    
+    #two_circle{
+
+        margin-top: 10px;
+        gap: 70px;
+    }
+    
+    #two_circle div{
+        height: 15px;
+        width: 15px;
+        border-radius: 50px;
+        background-color: #D30B3F;
+    }
+    
+    #left_bar{
+        position: fixed;
+        left: 0;
+        top: 35px;
+        background-color: rgb(196, 196, 196);
+        height: 100vh;
+        width: 35px;
+    
+        border-right: 3px solid rgb(146, 145, 145);
+    }
+    
+    #right_bar{
+        position: fixed;
+        right: 0;
+        top: 35px;
+        background-color: rgb(196, 196, 196);
+        height: 100vh;
+        width: 35px;
+    }
+    
+    #bottom_bar{
+        height: 110px;
+    }
+    
+    #corner_red{
+        bottom: 0;
+        left: 0;
+    
+        border-style: solid;
+        border-width: 0 100px 100px 0px;
+        border-color: transparent transparent rgb(99, 99, 99) transparent;
+    }
+    
+    #corner_gray{
+        position: absolute;
+        
+        bottom: 0;
+        left: 0;
+        
+        border-style: solid;
+        border-width: 0 80px 80px 0px;
+        border-color: transparent transparent #D30B3F transparent;
+    }
+    
+    #bottom_bar_button{
+        margin-top: 30px;
+        margin-left: 10px;
+        
+        height: 55px;
+        width: 55px;
+    }
+    
+    #icon_bottom_bar_button{
+        font-size: 20px;
+    }
+    #bottom_bar_button:hover{
+        background-color: #8F082A;
+        color: #27DEF2;
+    
+        transition: 0.4s;
+    }
+    
+    #bottom_bar_input.show {
+        opacity: 100%;
+        width: 30vw;
+    }
+    
+    #bottom_bar_input{
+    
+        transition: width 0.5s, opacity 0.5s;
+    
+        margin-top: 30px;
+        height: 50px;
+    
+        opacity: 0;
+        width: 0;
+    
+        background-color: #8F082A;
+    
+        color: white;
+        font-size: 24px;
+        padding: 0px 0px 0px 20px;
+    }
+    
+    
+    #bottom_bar_button_favorite{
+        margin-top: 30px;
+        margin-left: 10px;
+        
+        height: 55px;
+        width: 55px;
+    }
+    
+    #icon_bottom_bar_button_favorite{
+        font-size: 20px;
+    }
+    
+    
+    #bottom_bar_button_favorite:hover{
+        background-color: #8F082A;
+        color: #5EBF76;
+        transition: 0.4s;
+    }
+    
+    
+    #four_lines{
+        display: none;        
+    }
+    
+    #four_lines div{
+        height: 10px;
+        width: auto;
+        background-color: rgb(99, 99, 99);
+        box-shadow:  inset 0px 0px 10px rgb(0, 0, 0);
+    }
+    
+    
+    #footer_span{
+        position: absolute;
+        color: rgb(142, 142, 142);
+        bottom: 0;
+        right: 0;
+        margin-right: 30px;
+    }
 }
