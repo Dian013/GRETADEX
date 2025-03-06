@@ -4,4 +4,5 @@ Je tiens cependant à préciser que je suis conscient de leurs importances pour 
 Generation de 300 pokemon, ce choix n'est pas anodin, il me permet d'avoir des pokemon de différents région
 
 vert #5EBF76
+vert foncé #094030
 bleu #27DEF2

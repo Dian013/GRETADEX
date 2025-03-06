@@ -2,8 +2,8 @@ body{
     position: relative;
     margin: 0;
     padding: 0;
-    background-image: url(../img/9.svg);
-    /* background-size: ; */
+    background-color: #479a17;
+
 }
 
 .content{
@@ -51,6 +51,8 @@ body{
     height: 65px;
     width: 100vw;
     border-bottom: 3px solid rgb(99, 99, 99);
+
+    box-shadow: 0px 0px 20px rgb(59, 59, 59);
 }
 
 #two_circle{
@@ -83,6 +85,8 @@ body{
     background-color: rgb(196, 196, 196);
     height: 100vh;
     width: 65px;
+
+    box-shadow: -5px 20px 20px rgb(59, 59, 59);
 }
 
 #bottom_bar{
@@ -214,4 +218,5 @@ body{
     color: rgb(142, 142, 142);
     bottom: 0;
     right: 0;
+    margin-right: 30px;
 }
