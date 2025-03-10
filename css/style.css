@@ -85,19 +85,15 @@ body{
     justify-content: center;
 }
 
-#list_151_first img{
-    height: 200px;
-    width: auto;
-}
 
 #sticker_span_id_star{
-   font-size: 25px;
-   background-color: none;
-   text-decoration: none;
-   border: none;
-   background: none;
-   
-
+    font-size: 25px;
+    background-color: none;
+    text-decoration: none;
+    border: none;
+    background: none;
+    
+    
 }
 
 #sticker_span_name{
@@ -108,18 +104,25 @@ body{
     background-color: rgb(221, 221, 221);
 }
 
-#list_151_first a{
-    background-color: rgb(221, 221, 221);
-    padding: 5px;
-    border-radius: 5px;
+#list_151_first img{
+    height: 200px;
+    width: auto;
 }
 
-#list_151_first a:hover{
-    background-color: rgb(221, 221, 221);
-    padding: 5px;
-    border-radius: 5px;
+#id_div_sticker{
+    transition: 
+        transform 0.5s,
+        filter 0.5s;
+    filter:grayscale(100%);
 }
 
+#id_div_sticker:hover{
+    transition: 
+        transform 0.5s,
+        filter 0.5s;
+    transform: scale(1.05);
+    filter:grayscale(0%);
+}
 
 #space{   /*sert à avoir un espace sous le content qui nous permet de voir tout les éléments*/
     height: 140px;
@@ -208,53 +211,52 @@ body{
     border-color: transparent transparent #D30B3F transparent;
 }
 
-#bottom_bar_button{
-    margin-top: 40px;
-    margin-left: 100px;
-    
-    border-radius: 50px;
-    height: 80px;
-    width: 80px;
-    
-    background-color: #D30B3F;
+    /*Input*/
+        /*Bouton input*/
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 0px;
+            transition: width 0.3s ease;
+            overflow: hidden;
 
-    transition: 0.4s;
-}
+        }
+        #bottom_bar_input {
+            border: none;
+            outline: none;
+            width: 0px;
+            transition: width 0.3s ease;
+        }
+        .search-container.active #bottom_bar_input {
+            width: 200px;
+        }
+        #bottom_bar_button {
+            cursor: pointer;
+            width: 80px;
+            height: 80px;
+            border-radius: 50px;
+            background-color: #D30B3F;
+            transition: 0.4s;
+        }
 
-#icon_bottom_bar_button{
-    font-size: 30px;
-}
-#bottom_bar_button:hover{
-    background-color: #8F082A;
-    color: #27DEF2;
+        #icon_bottom_bar_button{
+            font-size: 30px;
+        }
 
-    transition: 0.4s;
-}
+        #bottom_bar_button:hover{
+            background-color: #8F082A;
+            color: #27DEF2;
 
-#bottom_bar_input.show {
-    opacity: 100%;
-    width: 30vw;
-}
-
-#bottom_bar_input{
-
-    transition: width 0.5s, opacity 0.5s;
-
-    margin-top: 40px;
-    height: 70px;
-
-    opacity: 0;
-    width: 0;
-
-    background-color: #8F082A;
-
-    color: white;
-    font-size: 24px;
-    padding: 0px 0px 0px 20px;
-}
+            transition: 0.4s;
+        }
+    /*Input*/
 
 
-#bottom_bar_button_favorite{
+/* anciennement favorite, maintenant c'est pour revenir au home */
+#bottom_bar_button_favorite{  
     margin-top: 40px;
     margin-left: 100px;
 
