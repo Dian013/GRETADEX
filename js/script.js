@@ -91,6 +91,7 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
             pokemon_sticker_name.textContent = forms[0].name
             pokemon_sticker_id.textContent = data.id
             pokemon_sticker_see_more.textContent = "See More"
+            pokemon_sticker_see_more.role = "Button"
             //chercher données
 
             
