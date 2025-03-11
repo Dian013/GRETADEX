@@ -57,7 +57,7 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
             pokemon_sticker_div.id = "id_div_sticker"
             let color = await div_background_color(url_species)
         
-            pokemon_sticker_div.className = `pixel-corners`
+            pokemon_sticker_div.className = `pixel-corners_10`
 
 
             let pokemon_sticker_img = document.createElement("img") //creation emplacement
@@ -72,7 +72,7 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
             //chercher données
             pokemon_sticker_img.src = sprites.front_default    
             pokemon_sticker_name.textContent = forms[0].name
-            pokemon_sticker_id.textContent = data.id
+            pokemon_sticker_id.textContent = `n°${data.id}`
             //chercher données
 
             
@@ -92,9 +92,9 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
 
 
 
+            pokemon_sticker_div.appendChild(pokemon_sticker_id)
             pokemon_sticker_div.appendChild(pokemon_sticker_img)  //ajouter dans emplacement
             pokemon_sticker_div.appendChild(pokemon_sticker_name)
-            pokemon_sticker_div.appendChild(pokemon_sticker_id)
             pokemon_sticker_div.appendChild(pokemon_sticker_types_div)
 
 
