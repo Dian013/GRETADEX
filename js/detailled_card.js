@@ -56,7 +56,7 @@ async function search_pokemon_evolutions(){
     }
 }
 
-function make_card_with_pokemon_evolutions(){
+function update_evolutions(){
     search_pokemon_evolutions().then(async res => {
         tab_evolution = res
 
@@ -85,14 +85,61 @@ async function detailled_card_function(){
     const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon_sticker_id}`)        
     const element = await data.json()
 
+    //Image Pokemon
     const img = element.sprites.other['official-artwork'].front_default
+    const card_img = document.querySelector("#card_img")
+    card_img.src = img
+    
+    //Nom Pokemon
     const name = element.forms[0].name
+    const card_name = document.querySelector("#card_name")
+    card_name.textContent = name
 
-    //Chercher evolution
-    make_card_with_pokemon_evolutions()
-    //Chercher evolution
+    updateDescription(pokemon_sticker_id)  //Chercher description
+     
+    updateProgressBar(element) //Chercher stats
 
-    //Chercher description
+    update_evolutions() //Chercher evolution
+}
+
+async function updateProgressBar(element) {
+    function setBarProperties(bar, value) {
+        const filledPart = bar.querySelector("span");
+
+        // Largeur en pixels (max 255px)
+        filledPart.style.width = value + "px";
+
+        // Supprimer les anciennes classes
+        bar.classList.remove("low", "medium", "high");
+
+        // Ajouter la bonne classe
+        if (value <= 85) {
+            bar.classList.add("low");
+        } else if (value <= 110) {
+            bar.classList.add("medium");
+        } else {
+            bar.classList.add("high");
+        }
+    }
+
+    const progress_bars = [
+        document.querySelector("#progress_bar_1"),
+        document.querySelector("#progress_bar_2"),
+        document.querySelector("#progress_bar_3"),
+        document.querySelector("#progress_bar_4"),
+        document.querySelector("#progress_bar_5"),
+        document.querySelector("#progress_bar_6"),
+    ];
+
+    progress_bars.forEach((bar, index) => {
+        const statValue = element.stats[index].base_stat;
+        setBarProperties(bar, statValue);
+        document.querySelector(`#label_progress_bar_${index + 1}`).textContent =
+            element.stats[index].stat.name + ` ${statValue} / 255`;
+    });
+}
+
+async function updateDescription(pokemon_sticker_id) {
     try {
         const data_characteristic = await fetch(`https://pokeapi.co/api/v2/characteristic/${pokemon_sticker_id}`) 
         const element_characteristic = await data_characteristic.json() //aller sur le json des evolution
@@ -106,51 +153,6 @@ async function detailled_card_function(){
         card_description.textContent = "it doesn't have a description, but all i know is that it's my favorite pokemon"
         card_description.style.textAlign= "center"
     }
-    //Chercher description
-//Chercher les infos
-
-//Intégrer infos à html
-    const card_img = document.querySelector("#card_img")
-    card_img.src = img
-
-    const card_name = document.querySelector("#card_name")
-    card_name.textContent = name
-
-
-
-    //TODO faire une boucle
-    const progress_bar_1 = document.querySelector("#progress_bar_1")
-    progress_bar_1.value = element.stats[0].base_stat 
-    const label_progress_bar_1 = document.querySelector("#label_progress_bar_1")
-    label_progress_bar_1.textContent = element.stats[0].stat.name + ` ${element.stats[0].base_stat }%`
-
-    const progress_bar_2 = document.querySelector("#progress_bar_2")
-    progress_bar_2.value = element.stats[1].base_stat 
-    const label_progress_bar_2 = document.querySelector("#label_progress_bar_2")
-    label_progress_bar_2.textContent = element.stats[1].stat.name + ` ${element.stats[1].base_stat }%`
-
-    const progress_bar_3 = document.querySelector("#progress_bar_3")
-    progress_bar_3.value = element.stats[2].base_stat 
-    const label_progress_bar_3 = document.querySelector("#label_progress_bar_3")
-    label_progress_bar_3.textContent = element.stats[2].stat.name + ` ${element.stats[2].base_stat }%`
-
-    const progress_bar_4 = document.querySelector("#progress_bar_4")
-    progress_bar_4.value = element.stats[3].base_stat 
-    const label_progress_bar_4 = document.querySelector("#label_progress_bar_4")
-    label_progress_bar_4.textContent = element.stats[3].stat.name + ` ${element.stats[3].base_stat }%`
-
-    const progress_bar_5 = document.querySelector("#progress_bar_5")
-    progress_bar_5.value = element.stats[4].base_stat 
-    const label_progress_bar_5 = document.querySelector("#label_progress_bar_5")
-    label_progress_bar_5.textContent = element.stats[4].stat.name + ` ${element.stats[4].base_stat }%`
-
-    const progress_bar_6 = document.querySelector("#progress_bar_6")
-    progress_bar_6.value = element.stats[5].base_stat 
-    const label_progress_bar_6 = document.querySelector("#label_progress_bar_6")
-    label_progress_bar_6.textContent = element.stats[5].stat.name + ` ${element.stats[5].base_stat }%`
-
-//Intégrer infos à html
-
 }
 
 function home(){
