@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="./css/stickers.css">          <!-- /GRETADEX/ -->
     <link rel="stylesheet" href="./css/detailled_card.css">     <!-- /GRETADEX/ -->
     <script src="js/detailled_card.js" defer></script>
+    <script>
+        if (window.location.hostname.includes("github.io")) {
+            document.documentElement.style.setProperty("--bg-image", "url('/GRETADEX/img/pokeballliss.png')");
+        } else {
+            document.documentElement.style.setProperty("--bg-image", "url('./img/pokeballliss.png')");
+        }
+    </script>     <!-- Pouvoir avec l'image avec github et go live -->
     <title>CARD</title>
 </head>
 <body>
