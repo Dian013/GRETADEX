@@ -10,3 +10,56 @@
     background-size: cover;
 }
 
+/* #list_151_first {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#id_div_sticker {
+    width: 120px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+#id_div_sticker:hover {
+    transform: scale(1.05);
+}
+
+#sticker_span_id {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#sticker_span_name {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+    text-transform: capitalize;
+}
+
+#id_div_sticker img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+#id_div_sticker div {
+    margin-top: 5px;
+}
+
+#id_div_sticker div span {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 3px 6px;
+    margin: 2px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+} */

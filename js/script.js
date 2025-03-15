@@ -36,74 +36,75 @@ function search_151_pokemon(){
     );
 }
 
-function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire pour qu'il prenne le temps de charger et les avoir dans l'ordre
-    fetch(url_pokemon)        
-        .then((res) => res.json())
-        .then(async (data) => {
-            const sprites = data.sprites; //pour acceder l'image
-            const forms = data.forms; //pour acceder au nom
-            const species = data.species; //pour trouver la couleur correspondant au pokemon
-            url_species = species.url
-            const div = document.querySelector('#list_151_first')
-            
-            let pokemon_sticker_div = document.createElement("div")
-            pokemon_sticker_div.id = "id_div_sticker"
-            let color = await div_background_color(url_species) 
-        
-            pokemon_sticker_div.className = `pixel-corners_10`
+// Appel de la fonction avec l'URL de la liste des Pokémon
+load_pokemons("https://pokeapi.co/api/v2/pokemon?limit=300");
 
-            let pokemon_sticker_img = document.createElement("img") //creation emplacement
-            let pokemon_sticker_name = document.createElement("span")
-            let pokemon_sticker_id = document.createElement("span") 
-            let pokemon_sticker_types_div = document.createElement("div") 
+async function load_pokemons(url_list) {
+    const res = await fetch(url_list);
+    const data = await res.json();
 
-            pokemon_sticker_name.id = "sticker_span_name"
-            pokemon_sticker_id.id = "sticker_span_id"
+    const stickersArray = new Array(data.results.length); // Stockage ordonné
 
-
-            //chercher données
-            pokemon_sticker_img.src = sprites.front_default    
-            pokemon_sticker_name.textContent = forms[0].name
-            pokemon_sticker_id.textContent = `n°${data.id}`
-            //chercher données
-
-            
-            let pokemon_sticker_id_to_export = data.id            //"Voir plus" button
-            pokemon_sticker_div.addEventListener("click", function(){
-                window.location.href = "detailled_card.html"
-                localStorage.setItem('pokemon_sticker_id', pokemon_sticker_id_to_export); 
-            })
-
-
-            const list_types = data.types
-            for (let i = 0; i < list_types.length; i++) {     //Crée un span pour les types du pokemon
-                let pokemon_sticker_type = document.createElement("span") 
-                pokemon_sticker_type.textContent = list_types[i].type.name
-                pokemon_sticker_types_div.appendChild(pokemon_sticker_type)
-            }
-
-
-
-            pokemon_sticker_div.appendChild(pokemon_sticker_id)
-            pokemon_sticker_div.appendChild(pokemon_sticker_img)  //ajouter dans emplacement
-            pokemon_sticker_div.appendChild(pokemon_sticker_name)
-            pokemon_sticker_div.appendChild(pokemon_sticker_types_div)
-
-
-
-            div.appendChild(pokemon_sticker_div)
-        }
-    );
+    data.results.forEach((pokemon, index) => {
+        make_pokemon_sticker(pokemon.url, index, stickersArray);
+    });
 }
+
+async function make_pokemon_sticker(url_pokemon, index, stickersArray) {
+    const res = await fetch(url_pokemon);
+    const data = await res.json();
+
+    const div = document.querySelector("#list_151_first");
+
+    const pokemon_sticker_div = document.createElement("div");
+    pokemon_sticker_div.className = "pixel-corners_10";
+    pokemon_sticker_div.id = "id_div_sticker";
+
+    // Récupération de l'image, du nom et du type
+    const img = document.createElement("img");
+    img.src = data.sprites.front_default;
+
+    const name = document.createElement("span");
+    name.textContent = data.forms[0].name;
+    name.id = "sticker_span_name";
+
+    const id = document.createElement("span");
+    id.textContent = `n°${data.id}`;
+    id.id = "sticker_span_id";
+
+    // Création du div pour les types
+    const typesDiv = document.createElement("div");
+    data.types.forEach(t => {
+        const typeSpan = document.createElement("span");
+        typeSpan.textContent = t.type.name;
+        typesDiv.appendChild(typeSpan);
+    });
+
+    // Ajout au div principal
+    pokemon_sticker_div.append(id, img, name, typesDiv);
+
+
+
+    // Stocker l'ordre avant l'affichage
+    stickersArray[index] = pokemon_sticker_div;
+
+    // Si tous les stickers sont chargés, les afficher dans l'ordre
+    if (!stickersArray.includes(undefined)) {
+        stickersArray.forEach(sticker => div.appendChild(sticker));
+    }
+
+
+
+    let pokemon_sticker_id_to_export = data.id   
+    pokemon_sticker_div.addEventListener("click", function(){
+        window.location.href = "detailled_card.html"
+        localStorage.setItem('pokemon_sticker_id', pokemon_sticker_id_to_export); 
+    })
+}
+
 
 async function div_background_color(url){
     const data = await fetch(url)        
     const color = await data.json()
     return color.color.name
 }
-
-function add_to_fav(){
-
-}
-
-search_151_pokemon()

@@ -79,31 +79,43 @@ function update_evolutions(){
     })    
 }
 
-async function detailled_card_function(){
-//Chercher les infos
-    const pokemon_sticker_id = localStorage.getItem("pokemon_sticker_id")
-    const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon_sticker_id}`)        
-    const element = await data.json()
+let isFront = false; // Pour savoir si on affiche l'image de face ou de dos
+let pokemonSprites = {}; // Stockage des images pour éviter plusieurs fetch()
 
-    //Image Pokemon
-    const img = element.sprites.other['official-artwork'].front_default
-    const card_img = document.querySelector("#card_img")
-    card_img.src = img
-    card_img.style.backgroundImage = "url(../img/pokeballliss.png)"
+async function detailled_card_function() {
+    try {
+        const pokemon_sticker_id = localStorage.getItem("pokemon_sticker_id");
+        if (!pokemon_sticker_id) {
+            console.error("Aucun ID de Pokémon trouvé !");
+            return;
+        }
 
+        // Fetch des données du Pokémon
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon_sticker_id}`);
+        const element = await response.json();
 
-    
-    //Nom Pokemon
-    const name = element.forms[0].name
-    const card_name = document.querySelector("#card_name")
-    card_name.textContent = name
+        // Récupération des images (utilisation de front_default et back_default)
+        pokemonSprites.front = element.sprites.other["showdown"].front_default;
+        pokemonSprites.back = element.sprites.other["showdown"].back_default; // Si pas de back, garder front
 
-    updateDescription(pokemon_sticker_id)  //Chercher description
-     
-    updateProgressBar(element) //Chercher stats
+        // Mise à jour de l'image
+        const card_img = document.querySelector("#card_img");
+        card_img.src = pokemonSprites.front;
+        card_img.style.backgroundImage = "url(../img/pokeballliss.png)";
 
-    update_evolutions() //Chercher evolution
+        // Mise à jour du nom
+        document.querySelector("#card_name").textContent = element.forms[0].name;
+
+        // Récupération des autres infos
+        updateDescription(pokemon_sticker_id);
+        updateProgressBar(element);
+        update_evolutions();
+
+    } catch (error) {
+        console.error("Erreur lors du chargement des données du Pokémon :", error);
+    }
 }
+
 
 async function updateProgressBar(element) {
     function setBarProperties(bar, value) {
@@ -160,6 +172,13 @@ async function updateDescription(pokemon_sticker_id) {
 
 function home(){
     window.location.href = "home.html"
+}
+
+function rotate(){
+    const card_img = document.querySelector("#card_img");
+    
+    card_img.src = isFront ? pokemonSprites.front : pokemonSprites.back;
+    isFront = !isFront;
 }
 
 detailled_card_function()
