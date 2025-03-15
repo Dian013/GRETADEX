@@ -4,13 +4,6 @@ function home(){
 
 
 function input_appear() {
-    // let bottom_bar_input = document.querySelector("#bottom_bar_input")
-    
-    // if (bottom_bar_input.classList.contains("show")) {
-    //     bottom_bar_input.classList.remove("show")
-    // } else {
-    //     bottom_bar_input.classList.add("show")
-    // }
     const searchContainer = document.querySelector('.search-container');
     searchContainer.classList.toggle('active');
 }
@@ -55,10 +48,9 @@ function make_pokemon_sticker(url_pokemon) {  //TODO voir comment je peux faire 
             
             let pokemon_sticker_div = document.createElement("div")
             pokemon_sticker_div.id = "id_div_sticker"
-            let color = await div_background_color(url_species)
+            let color = await div_background_color(url_species) 
         
             pokemon_sticker_div.className = `pixel-corners_10`
-
 
             let pokemon_sticker_img = document.createElement("img") //creation emplacement
             let pokemon_sticker_name = document.createElement("span")

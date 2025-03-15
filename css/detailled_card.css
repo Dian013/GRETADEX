@@ -34,7 +34,6 @@
     width: auto;
     height: 40vh;
     object-fit: fill;
-    background-image: var(--bg-image);
     background-size: 100%;
     padding: 4vw;
     border-radius: 100%;

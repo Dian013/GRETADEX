@@ -89,6 +89,9 @@ async function detailled_card_function(){
     const img = element.sprites.other['official-artwork'].front_default
     const card_img = document.querySelector("#card_img")
     card_img.src = img
+    card_img.style.backgroundImage = "url(../img/pokeballliss.png)"
+
+
     
     //Nom Pokemon
     const name = element.forms[0].name
