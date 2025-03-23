@@ -70,11 +70,18 @@ function update_evolutions(){
             evolution_gif = element_evolution_card.sprites.other.showdown.front_default
 
             const card_evolution = document.querySelector("#card_evolution")
-            const card_evol_stade = document.createElement("img")
-
-            card_evol_stade.src = evolution_gif
+            const card_evol_stade_img = document.createElement("img")
+            card_evol_stade_img.src = evolution_gif
+            card_evol_stade_img.id = "card_evol_stade_img"
             
-            card_evolution.appendChild(card_evol_stade)  
+            const card_evol_stade_div = document.createElement("div")
+            card_evol_stade_div.id = "card_evol_stade_div"
+            card_evol_stade_div.style.backgroundImage = "url(../img/pokeballliss.png)";
+            
+
+            
+            card_evol_stade_div.appendChild(card_evol_stade_img)  
+            card_evolution.appendChild(card_evol_stade_div)  
         }
     })    
 }
@@ -101,7 +108,9 @@ async function detailled_card_function() {
         // Mise à jour de l'image
         const card_img = document.querySelector("#card_img");
         card_img.src = pokemonSprites.front;
-        card_img.style.backgroundImage = "url(../img/pokeballliss.png)";
+
+        const div_card_img = document.querySelector("#div_card_img");
+        div_card_img.style.backgroundImage = "url(../img/pokeballliss.png)";
 
         // Mise à jour du nom
         document.querySelector("#card_name").textContent = element.forms[0].name;
@@ -115,7 +124,6 @@ async function detailled_card_function() {
         console.error("Erreur lors du chargement des données du Pokémon :", error);
     }
 }
-
 
 async function updateProgressBar(element) {
     function setBarProperties(bar, value) {
@@ -146,11 +154,23 @@ async function updateProgressBar(element) {
         document.querySelector("#progress_bar_6"),
     ];
 
+    const maxStats = {
+        hp: 255,
+        attack: 190,
+        defense: 250,
+        "special-attack": 194,
+        "special-defense": 250,
+        speed: 200
+    };
+
     progress_bars.forEach((bar, index) => {
+        const stat = element.stats[index].stat.name;
         const statValue = element.stats[index].base_stat;
-        setBarProperties(bar, statValue);
+        const maxValue = maxStats[stat] || 255; // Fallback à 255 si la stat n'existe pas dans l'objet
+    
+        setBarProperties(bar, statValue, maxValue);
         document.querySelector(`#label_progress_bar_${index + 1}`).textContent =
-            element.stats[index].stat.name + ` ${statValue} / 255`;
+            `${stat} ${statValue} / ${maxValue}`;
     });
 }
 

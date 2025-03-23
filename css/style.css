@@ -98,24 +98,23 @@ body{
     background-color: rgb(221, 221, 221);
 }
 
-#list_151_first img{
+#list_151_first img {
     height: 200px;
     width: auto;
+    filter: grayscale(100%);
+    transition: filter 0.5s;
 }
 
-#id_div_sticker{
-    transition: 
-        transform 0.5s,
-        filter 0.5s;
-    filter:grayscale(100%);
+#id_div_sticker {
+    transition: transform 0.5s, filter 0.5s;
 }
 
-#id_div_sticker:hover{
-    transition: 
-        transform 0.5s,
-        filter 0.5s;
+#id_div_sticker:hover {
     transform: scale(1.05);
-    filter:grayscale(0%);
+}
+
+#id_div_sticker:hover #sticker_span_img {
+    filter: grayscale(0%);
 }
 
 #space{   /*sert à avoir un espace sous le content qui nous permet de voir tout les éléments*/

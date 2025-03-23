@@ -63,14 +63,19 @@ async function make_pokemon_sticker(url_pokemon, index, stickersArray) {
     // Récupération de l'image, du nom et du type
     const img = document.createElement("img");
     img.src = data.sprites.front_default;
-
-    const name = document.createElement("span");
-    name.textContent = data.forms[0].name;
-    name.id = "sticker_span_name";
+    img.id = "sticker_span_img";
 
     const id = document.createElement("span");
     id.textContent = `n°${data.id}`;
     id.id = "sticker_span_id";
+
+    const name = document.createElement("span");
+    name.textContent = data.forms[0].name;
+    name.id = "sticker_span_name";
+    const color = await div_background_color(`https://pokeapi.co/api/v2/pokemon-species/${data.id}`);
+    console.log(data.id)
+    name.style.borderTop = `6px solid ${color}`;
+
 
     // Création du div pour les types
     const typesDiv = document.createElement("div");
