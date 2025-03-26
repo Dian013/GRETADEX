@@ -1,89 +1,64 @@
-async function search_pokemon_evolutions(){
-    try {     //Trouve 3 evolutions
-        const pokemon_sticker_id = localStorage.getItem("pokemon_sticker_id")
-
-        const data_pokemon_species = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon_sticker_id}`)
-        const element_evolution = await data_pokemon_species.json()  //aller sur le json pokemon species
-        const evolution_chain_url = element_evolution.evolution_chain.url //chercher l'url des evolutions
-
-        const data_evolution_chain = await fetch(`${evolution_chain_url}`) 
-        const element_evolution_chain = await data_evolution_chain.json() //aller sur le json des evolution
-
-        const evolution_1 = element_evolution_chain.chain.species.name
-        const evolution_2 = element_evolution_chain.chain.evolves_to[0].species.name
-        const evolution_3 = element_evolution_chain.chain.evolves_to[0].evolves_to[0].species.name
-
-
-        let tab_evolution = [evolution_1, evolution_2, evolution_3]
-        return tab_evolution
-
-    } catch {
-        try { //Trouve 2 evolutions
-            const pokemon_sticker_id = localStorage.getItem("pokemon_sticker_id")
-    
-            const data_pokemon_species = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon_sticker_id}`)
-            const element_evolution = await data_pokemon_species.json()  //aller sur le json pokemon species
-            const evolution_chain_url = element_evolution.evolution_chain.url //chercher l'url des evolutions
-    
-            const data_evolution_chain = await fetch(`${evolution_chain_url}`) 
-            const element_evolution_chain = await data_evolution_chain.json() //aller sur le json des evolution
-    
-            const evolution_1 = element_evolution_chain.chain.species.name
-            const evolution_2 = element_evolution_chain.chain.evolves_to[0].species.name    
-    
-            let tab_evolution = [evolution_1, evolution_2]
-            return tab_evolution
-
-        }catch{
-            try{ //Trouve pokemon seul
-                const pokemon_sticker_id = localStorage.getItem("pokemon_sticker_id")
-    
-                const data_pokemon_species = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon_sticker_id}`)
-                const element_evolution = await data_pokemon_species.json()  //aller sur le json pokemon species
-                const evolution_chain_url = element_evolution.evolution_chain.url //chercher l'url des evolutions
+async function search_pokemon_evolutions() {
+    try {
+        const pokemon_sticker_id = localStorage.getItem("pokemon_sticker_id");
         
-                const data_evolution_chain = await fetch(`${evolution_chain_url}`) 
-                const element_evolution_chain = await data_evolution_chain.json() //aller sur le json des evolution
+        // Récupération des données de l'espèce du Pokémon
+        const data_pokemon_species = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon_sticker_id}`);
+        const element_evolution = await data_pokemon_species.json();
+        const evolution_chain_url = element_evolution.evolution_chain.url; // URL de la chaîne d'évolution
         
-                const evolution_1 = element_evolution_chain.chain.species.name 
+        // Récupération des données de la chaîne d'évolution
+        const data_evolution_chain = await fetch(evolution_chain_url);
+        const element_evolution_chain = await data_evolution_chain.json();
         
-                let tab_evolution = [evolution_1]
-                return tab_evolution
-            }catch{
-                console.log("Error search evolution")
+        // Fonction récursive pour récupérer toutes les évolutions
+        const getEvolutions = (chain) => {
+            let evolutions = [chain.species.name]; // Ajouter l'évolution actuelle
+            if (chain.evolves_to.length > 0) {
+                // Si ce Pokémon évolue, on ajoute les suivantes
+                chain.evolves_to.forEach(nextChain => {
+                    evolutions = evolutions.concat(getEvolutions(nextChain)); // Appel récursif pour récupérer les évolutions
+                });
             }
-        }
+            return evolutions;
+        };
+
+        // Récupérer toutes les évolutions à partir de la chaîne d'évolution
+        const allEvolutions = getEvolutions(element_evolution_chain.chain);
+        return allEvolutions;
+
+    } catch (error) {
+        console.log("Error search evolution", error);
+        return [];
     }
 }
 
-function update_evolutions(){
+function update_evolutions() {
     search_pokemon_evolutions().then(async res => {
-        tab_evolution = res
+        const tab_evolution = res;
 
-        console.log(tab_evolution)
+        const card_evolution = document.querySelector("#card_evolution");
+        card_evolution.innerHTML = ''; // Clear existing evolutions
 
+        // Pour chaque évolution, récupérer et afficher les images correspondantes
         for (let i = 0; i < tab_evolution.length; i++) {
+            const data_evolution_card = await fetch(`https://pokeapi.co/api/v2/pokemon/${tab_evolution[i]}`);
+            const element_evolution_card = await data_evolution_card.json();
 
-            const data_evolution_card = await fetch(`https://pokeapi.co/api/v2/pokemon/${tab_evolution[i]}`)  
-            const element_evolution_card = await data_evolution_card.json()
-                 
-            evolution_gif = element_evolution_card.sprites.other.showdown.front_default
+            const evolution_gif = element_evolution_card.sprites.other.showdown.front_default;
 
-            const card_evolution = document.querySelector("#card_evolution")
-            const card_evol_stade_img = document.createElement("img")
-            card_evol_stade_img.src = evolution_gif
-            card_evol_stade_img.id = "card_evol_stade_img"
+            const card_evol_stade_img = document.createElement("img");
+            card_evol_stade_img.src = evolution_gif;
+            card_evol_stade_img.id = "card_evol_stade_img";
             
-            const card_evol_stade_div = document.createElement("div")
-            card_evol_stade_div.id = "card_evol_stade_div"
+            const card_evol_stade_div = document.createElement("div");
+            card_evol_stade_div.id = "card_evol_stade_div";
             card_evol_stade_div.style.backgroundImage = "url(../img/pokeballliss.png)";
-            
 
-            
-            card_evol_stade_div.appendChild(card_evol_stade_img)  
-            card_evolution.appendChild(card_evol_stade_div)  
+            card_evol_stade_div.appendChild(card_evol_stade_img);
+            card_evolution.appendChild(card_evol_stade_div);
         }
-    })    
+    });
 }
 
 let isFront = false; // Pour savoir si on affiche l'image de face ou de dos
@@ -176,13 +151,17 @@ async function updateProgressBar(element) {
 
 async function updateDescription(pokemon_sticker_id) {
     try {
-        const data_characteristic = await fetch(`https://pokeapi.co/api/v2/characteristic/${pokemon_sticker_id}`) 
+        const data_characteristic = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon_sticker_id}`) 
         const element_characteristic = await data_characteristic.json() //aller sur le json des evolution
 
-        const description = element_characteristic.descriptions[7].description
+        const description = element_characteristic.flavor_text_entries.find(entry => entry.language.name === 'en');
+        const cleanedDescription = description.flavor_text.replace(/[\f\n]/g, ' ');  //enlever saut de ligne et espace
 
         const card_description = document.querySelector("#card_description")
-        card_description.textContent = description
+
+        card_description.textContent = cleanedDescription
+        card_description.style.textAlign= "center"
+    
     } catch {
         const card_description = document.querySelector("#card_description")
         card_description.textContent = "it doesn't have a description, but all i know is that it's my favorite pokemon"
@@ -192,13 +171,6 @@ async function updateDescription(pokemon_sticker_id) {
 
 function home(){
     window.location.href = "home.html"
-}
-
-function rotate(){
-    const card_img = document.querySelector("#card_img");
-    
-    card_img.src = isFront ? pokemonSprites.front : pokemonSprites.back;
-    isFront = !isFront;
 }
 
 detailled_card_function()

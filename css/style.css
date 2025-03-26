@@ -77,6 +77,16 @@ body{
     justify-self: center;
 
     background-color:  #5EBF76;
+
+    font-size: 20px;
+}
+
+#filter_container{
+    justify-self: center;
+}
+
+#filter_select{
+    font-size: 20px;
 }
 
 #list_151_first{
@@ -86,32 +96,86 @@ body{
 }
 
 #sticker_span_id{
-    margin: 10px 10px 0px 0px;
-    align-self: flex-end;
+    margin: 10px 0px 0px 10px;
+    font-size: 16px;
+    align-self: flex-start;
 }
 
 #sticker_span_name{
     text-transform: uppercase;
     font-weight: 300;
+    font-size: 24px;
     width: 100%;
     text-align: center;
-    background-color: rgb(221, 221, 221);
+    padding-bottom: 10px;
+}
+
+#sticker_span_type{
+    background-color: rgb(206, 206, 206);
+    padding: 2px 7px;
+    margin: 0px 5px;
+    border-radius: 10px;
+}
+
+#sticker_span_type::first-letter {
+    text-transform: uppercase;
+}
+
+#sticker_div_name_and_types{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    gap: 10px;
 }
 
 #list_151_first img {
     height: 200px;
     width: auto;
-    filter: grayscale(100%);
-    transition: filter 0.5s;
 }
 
 #id_div_sticker {
-    transition: transform 0.5s, filter 0.5s;
+    position: relative; /* Nécessaire pour positionner le pseudo-élément */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2); /* Fond plus sombre */
+    transition: transform 0.5s, background-color 0.5s, filter 0.5s;
+    filter: grayscale(70%);
+}
+
+#id_div_sticker::before {
+    content: ""; /* Nécessaire pour afficher un pseudo-élément */
+    position: absolute; /* Positionner le pseudo-élément */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../img/pokeball.png);
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Transitions de l'opacité */
+    border-radius: 10px; /* Assure que l'image de fond respecte les bords arrondis */
 }
 
 #id_div_sticker:hover {
     transform: scale(1.05);
+    cursor: pointer;
+    filter: grayscale(0%);
+    transition: transform 0.5s, background-color 0.5s, filter 0.5s;;
+
 }
+
+#id_div_sticker:hover::before {
+    opacity: 1; /* Montre l'image de fond au survol */
+    z-index: -1;
+}
+
 
 #id_div_sticker:hover #sticker_span_img {
     filter: grayscale(0%);
@@ -258,39 +322,6 @@ body{
 }
     /*Input*/
 
-
-/* anciennement favorite, maintenant c'est pour revenir au home */
-#bottom_bar_button_favorite{  
-    display: flex;
-    justify-content: center;
-
-    align-self: center;
-    margin-left: 50px;
-
-    cursor: pointer;
-
-    border-radius: 50px;
-    height: 80px;
-    width: 80px;
-
-    background-color: #D30B3F;
-
-    transition: 0.4s;
-}
-
-#icon_bottom_bar_button_favorite{
-    font-size: 30px;
-    align-self: center;
-}
-
-
-#bottom_bar_button_favorite:hover{
-    background-color: #8F082A;
-    color: #5EBF76;
-    transition: 0.4s;
-}
-
-
 #four_lines{
     position: absolute;
 
@@ -321,62 +352,7 @@ body{
     margin-right: 30px;
 }
 
-@media (max-width: 750px) {
-    body{
-        background-color: rgb(253, 104, 49);
-    }
-    
-    .content{
-        margin: 65px 35px 135px 35px;
-        height: 100vh;
-    }
-    
-
-    #logo_home{
-        height: 80px
-    }
-    
-    #filter_button{
-        padding: 10px 20px;
-    
-        display: flex;
-        justify-self: center;
-    
-        background-color:  #5EBF76;
-    }
-    
-    #list_151_first{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    #list_151_first{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    #list_151_first div{
-        height: auto;
-        width: 100px;
-    }
-    
-    #list_151_first img{
-        height: 80px;
-        width: auto;
-    }
-
-    #space{   /*sert à avoir un espace sous le content qui nous permet de voir tout les éléments*/
-        height: 115px;
-        width: auto;
-    }
-    
-    /*Screen Pokedex effect*/
-    #screen{
-        position: relative;
-    }
-    
+@media (max-width: 1440px) {
     #top_bar{
         position: fixed;
         top: 0;
@@ -384,7 +360,6 @@ body{
         height: 35px;
         width: 100vw;
         border-bottom: 3px solid rgb(99, 99, 99);
-    
         box-shadow: 0px 0px 20px rgb(59, 59, 59);
     }
     
@@ -444,66 +419,115 @@ body{
         border-width: 0 80px 80px 0px;
         border-color: transparent transparent #D30B3F transparent;
     }
+}
+
+@media (max-width: 750px) {
+    body{
+        background-color: rgb(253, 104, 49);
+    }
     
-    #bottom_bar_button{
-        margin-top: 30px;
+    .content{
+        margin: 65px 35px 135px 35px;
+        height: 100vh;
+    }
+    
+    #logo_home{
+        height: 80px
+    }
+    
+    #filter_button{
+        padding: 10px 20px;
+    
+        display: flex;
+        justify-self: center;
+    
+        background-color:  #5EBF76;
+    }
+    
+    #list_151_first{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #list_151_first{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #list_151_first div{
+        height: auto;
+        width: 100px;
+    }
+    
+    #list_151_first img{
+        height: 80px;
+        width: auto;
+    }
+
+    #space{   /*sert à avoir un espace sous le content qui nous permet de voir tout les éléments*/
+        height: 115px;
+        width: auto;
+    }
+    
+    /*Screen Pokedex effect*/
+    #screen{
+        position: relative;
+    }
+    
+    /*Input*/
+    .search-container {
+        display: flex;
+        align-self: center;
         margin-left: 10px;
-        
+        background: white;
+        border-radius: 50px;
         height: 55px;
-        width: 55px;
+        transition: width 0.3s ease,
+                    background-color 0.6s ease;
+        background-color: #00000000;
     }
-    
-    #icon_bottom_bar_button{
+    #bottom_bar_input {
+        border: none;
+        outline: none;
+        width: 0px;
+        height: auto;
         font-size: 20px;
+        border-radius: 50px;
+        padding: 0px 10px;
+        transition: width 0.3s ease,
+                    background-color 0.6s ease;
+        background-color: #00000000;
     }
+    .search-container.active #bottom_bar_input {
+        width: 100px;
+    }
+
+    .search-container.active {
+        background-color: #8F082A;
+    }
+
+    #bottom_bar_button {
+        cursor: pointer;
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        background-color: #D30B3F;
+        transition: 0.4s;
+    }
+
+    #icon_bottom_bar_button{
+        font-size: 22px;
+    }
+
     #bottom_bar_button:hover{
         background-color: #8F082A;
         color: #27DEF2;
-    
+
         transition: 0.4s;
     }
-    
-    #bottom_bar_input.show {
-        opacity: 100%;
-        width: 30vw;
-    }
-    
-    #bottom_bar_input{
-    
-        transition: width 0.5s, opacity 0.5s;
-    
-        margin-top: 30px;
-        height: 50px;
-    
-        opacity: 0;
-        width: 0;
-    
-        background-color: #8F082A;
-    
-        color: white;
-        font-size: 24px;
-        padding: 0px 0px 0px 20px;
-    }
-    
-    
-    #bottom_bar_button_favorite{
-        margin-top: 30px;
-        margin-left: 10px;
-        
-        height: 55px;
-        width: 55px;
-    }
-    
-    #icon_bottom_bar_button_favorite{
-        font-size: 20px;
-    }
-    
-    
-    #bottom_bar_button_favorite:hover{
-        background-color: #8F082A;
-        color: #5EBF76;
-        transition: 0.4s;
-    }
+    /*Input*/
     
     
     #four_lines{
@@ -524,5 +548,17 @@ body{
         bottom: 0;
         right: 0;
         margin-right: 30px;
+    }
+}
+
+@media (max-width: 425px) {
+    #list_151_first {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #id_div_sticker {
+        width: 100%;
+        max-width: 400px; /* Pour éviter que ça soit trop large sur certains écrans */
     }
 }

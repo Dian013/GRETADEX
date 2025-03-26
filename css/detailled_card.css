@@ -117,6 +117,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     padding: 50px 0px;
 }
 
@@ -144,8 +145,27 @@
     height: auto;
 }
 
+#bottom_bar_button_home{
+    align-self: center;
+    margin-left: 50px;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    background-color: #D30B3F;
+    transition: 0.4s;
+}
 
+#icon_bottom_bar_button_favorite{
+    font-size: 30px;
+}
 
+#bottom_bar_button_home:hover{
+    background-color: #8F082A;
+    color: #5EBF76;
+
+    transition: 0.4s;
+}
 @media (max-width: 750px) {
     #card{
         display: flex;
@@ -224,5 +244,22 @@
     #card_stats{
         padding-left: 0px;
         gap: 0px;
+    }
+
+    #bottom_bar_button_home{
+        margin-left: 10px;
+        width: 55px;
+        height: 55px;
+    }
+    
+    #icon_bottom_bar_button_favorite{
+        font-size: 22px;
+    }
+    
+    #bottom_bar_button_home:hover{
+        background-color: #8F082A;
+        color: #5EBF76;
+    
+        transition: 0.4s;
     }
 }
