@@ -33,8 +33,8 @@ function filter_pokemon() {
         filter_button.textContent = 'Région';
         filter_button.style.backgroundColor = '#27DEF2';
 
-        let types = ["Normal", "Feu", "Eau", "Plante", "Électrik", "Glace", "Combat", "Poison", "Sol", "Vol",
-                     "Psy", "Insecte", "Roche", "Spectre", "Dragon", "Ténèbres", "Acier", "Fée"];
+        let types = ["Normal", "Fire", "Water", "Grass", "Electric", "Ice", "Fighting", "Poison", "Ground", "Flying",
+            "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy"];
 
         types.forEach(type => {
             let option = document.createElement("option");
@@ -47,7 +47,7 @@ function filter_pokemon() {
         filter_button.textContent = 'Types';
         filter_button.style.backgroundColor = '#5EBF76';
 
-        let regions = ["Kanto", "Johto", "Hoenn", "Sinnoh", "Unys", "Kalos", "Alola", "Galar", "Paldea"];
+        let regions = ["Kanto", "Johto", "Hoenn", "Sinnoh", "Unova", "Kalos", "Alola", "Galar", "Paldea"];
 
         regions.forEach(region => {
             let option = document.createElement("option");
@@ -57,14 +57,35 @@ function filter_pokemon() {
         });
     }
 
+    select.addEventListener("change", function() {
+        let selectedValue = select.value;
+        console.log("Sélectionné : " + selectedValue); 
+        const div = document.querySelector("#list_151_first");
+        div.innerHTML = ""; 
+        make_pokemon_sticker_type(`https://pokeapi.co/api/v2/type/${selectedValue}`)
+    });
+
     // Ajoute le select au conteneur prévu
     filter_container.appendChild(select);
 }
 
+async function make_pokemon_sticker_type(url){   //TODO J'ai une autre idée plutot regarder dans les stickers les types et trier en fonction de si il a le type ou non
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        
+        pokemons = data.pokemon
+        // pokemons.forEach(pokemon =>console.log(pokemon.pokemon.url));
+        pokemons.forEach(pokemon => make_pokemon_sticker(pokemon.pokemon.url));
+    } catch (error){
+        console.error("Erreur lors de la chargement de pokemon par type :", error);
+    }
+}
 
 async function load_pokemons() {
     try {
-        const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=125&offset=0");
+        const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0");
         const data = await res.json();
 
         const stickersArray = new Array(data.results.length); // Stockage ordonné
